@@ -203,13 +203,11 @@
   /* max-height: 0px; */
   overflow: hidden;
   position: relative;
-  /* display: none; */
   padding: 0px 10px 16px 10px;
-  /*position: absolute;*/
   width: 100%;
   background-color: #fff;
   border-radius: 0px 0px 12px 12px;
-  transition: 0.8s;
+  transition: 0.7s;
 }
 
 .cart_section {

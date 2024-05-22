@@ -1,15 +1,22 @@
+import { useDispatch } from "react-redux";
 import styles from "./Order.module.css";
+import { decreaseCount, increaseCount } from "../../redux/CartSlice";
 
-
-function Count() {
-
+function Count({ id, count }) {
+  const dispatch = useDispatch();
+  function increase() {
+    dispatch(increaseCount(id));
+  }
+  function decrease() {
+    dispatch(decreaseCount(id));
+  }
   return (
     <div className={styles.card_number}>
-      <button className={styles.minus_number}>
+      <button className={styles.minus_number} onClick={decrease}>
         -
       </button>
-      <p>1</p>
-      <button className={styles.plus_number}>
+      <p>{count}</p>
+      <button className={styles.plus_number} onClick={increase}>
         +
       </button>
     </div>

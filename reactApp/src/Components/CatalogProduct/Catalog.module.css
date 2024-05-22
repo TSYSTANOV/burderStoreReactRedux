@@ -25,6 +25,10 @@
   transition: 0.1s;
   position: relative;
 }
+.item__product--inCart {
+  border: 2px solid #ff7020;
+}
+
 .item__product::after {
   content: "";
   position: absolute;
@@ -101,6 +105,11 @@
 }
 .item__product button:active {
   transform: translate(2px, 2px);
+}
+.item__product button:disabled {
+  background-color: #ff7020;
+  color: white;
+  cursor: auto;
 }
 
 @media (min-width: 768px) {
