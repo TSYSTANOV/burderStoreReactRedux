@@ -14,8 +14,7 @@ function ModalProduct() {
     setCount(1);
   }
   function addProductToCart() {
-    const a = dispatch(addProduct({ id: activeProductInfo.id, count: count }));
-    console.log(a);
+    dispatch(addProduct({ id: activeProductInfo.id, count: count }));
     dispatch(closeModal());
     setCount(1);
   }

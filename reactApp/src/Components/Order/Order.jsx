@@ -3,12 +3,17 @@ import styles from "./Order.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { closeCart, fetchCartProducts, openCart } from "../../redux/CartSlice";
 import { OrderGoods } from "./OrderGoods";
+import { toggleOpen } from "../../redux/FormOrderSlice";
+
 function Order() {
   const dispatch = useDispatch();
   const CartBtnContainer = useRef();
   const { cart, productsList, totalSum, totalCount, isOpen } = useSelector(
     (state) => state.cart
   );
+  function handleOpenFormOrder() {
+    dispatch(toggleOpen());
+  }
   function handleOpenCart() {
     if (isOpen) {
       dispatch(closeCart());
@@ -55,12 +60,15 @@ function Order() {
                     <span>₽</span>
                   </p>
                 </div>
-                <button className={styles.cart_container_footer_button}>
+                <button
+                  className={styles.cart_container_footer_button}
+                  onClick={handleOpenFormOrder}
+                >
                   Оформить
                 </button>
                 <div className={styles.cart_container_footer_info}>
                   <p>Бесплатная доставка</p>
-                  <button>Свернуть</button>
+                  <button onClick={handleOpenCart}>Свернуть</button>
                 </div>
               </div>
             ) : (

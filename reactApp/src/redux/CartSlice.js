@@ -23,29 +23,20 @@ export const fetchCartProducts = createAsyncThunk(
 );
 
 export const localStorAddProductMiddleware = (state) => (next) => (action) => {
-  // const nextAction = next(action);
-  let itemID = null;
-  if (
-    action.type === "cart/addProduct"
-    //   // ||
-    //   // "cart/increaseCount" ||
-    //   // "cart/decreaseCount"
-  ) {
-    itemID = setTimeout(() => next(action), 2000);
-  } else {
-    return next(action);
-  }
-  //   localStorage.setItem(
-  //     "order",
-  //     JSON.stringify(state.getState().cart.productsList)
-  //   );
-  // }
-  // return nextAction;
+  const nextAction = next(action);
 
-  return () => {
-    console.log(200);
-    clearTimeout(itemID);
-  };
+  if (
+    action.type === "cart/addProduct" ||
+    action.type === "cart/increaseCount" ||
+    action.type === "cart/decreaseCount" ||
+    action.type === "formSubmit/post/fulfilled"
+  ) {
+    localStorage.setItem(
+      "order",
+      JSON.stringify(state.getState().cart.productsList)
+    );
+  }
+  return nextAction;
 };
 
 const CartSlice = createSlice({
@@ -97,6 +88,13 @@ const CartSlice = createSlice({
     closeCart: (state) => {
       state.isOpen = false;
     },
+    resetCart: (state) => {
+      state.productsList = [];
+      state.cart = [];
+      state.totalSum = 0;
+      state.totalCount = 0;
+      state.isOpen = false;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCartProducts.fulfilled, (state, action) => {
@@ -109,6 +107,12 @@ const CartSlice = createSlice({
     });
   },
 });
-export const { addProduct, increaseCount, decreaseCount, openCart, closeCart } =
-  CartSlice.actions;
+export const {
+  addProduct,
+  increaseCount,
+  decreaseCount,
+  openCart,
+  closeCart,
+  resetCart,
+} = CartSlice.actions;
 export default CartSlice.reducer;

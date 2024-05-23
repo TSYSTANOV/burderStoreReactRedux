@@ -5,13 +5,16 @@ import CategorySlice, {
 import ProductsSlice from "./ProductsSlice";
 import ModalProduct from "./ModalProduct";
 import CartSlice, { localStorAddProductMiddleware } from "./CartSlice";
-
+import ModalSubmitFormSlice from "./ModalSubmitFormSlice";
+import FormOrderSlice from "./FormOrderSlice";
 export const store = configureStore({
   reducer: {
     category: CategorySlice,
     products: ProductsSlice,
     modalProduct: ModalProduct,
     cart: CartSlice,
+    form: ModalSubmitFormSlice,
+    formOrder: FormOrderSlice,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
@@ -19,3 +22,4 @@ export const store = configureStore({
       .concat(localStorAddProductMiddleware);
   },
 });
+console.log(store.getState());
